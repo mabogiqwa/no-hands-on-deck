@@ -3,7 +3,7 @@ const canvas=document.getElementById("myCanvas");
 canvas.height=window.innerHeight;
 //Above line of code sets the height of canvas to match height of visible browser length
 canvas.width=210
-//Above line of code sets width of canvas to 2
+//Above line of code sets width of canvas to 210
 
 const ctx =canvas.getContext("2d");
 /*Above line of code allows us to render 2D shapes on the canvas.
