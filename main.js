@@ -13,3 +13,11 @@ const car=new Car(100,100,30,50);
 and the last two represent the dimensions of the car*/
 car.draw(ctx);
 //The draw method renders the 2D shape
+
+function animate(){
+    car.update();
+    car.draw(ctx);
+    requestAnimationFrame(animate); //Gives the illusion of movement by rendering ~60fps
+}
+
+animate();
