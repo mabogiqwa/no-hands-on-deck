@@ -1,7 +1,5 @@
 const canvas=document.getElementById("myCanvas");
 //The above line of code retrieves the HTML element with attribute 'myCanvas'
-canvas.height=window.innerHeight;
-//Above line of code sets the height of canvas to match height of visible browser length
 canvas.width=210
 //Above line of code sets width of canvas to 210
 
@@ -16,6 +14,8 @@ car.draw(ctx);
 
 function animate(){
     car.update();
+    canvas.height=window.innerHeight;
+    //Above line of code sets the height of canvas to match height of visible browser length
     car.draw(ctx);
     requestAnimationFrame(animate); //Gives the illusion of movement by rendering ~60fps
 }
