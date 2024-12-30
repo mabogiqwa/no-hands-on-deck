@@ -17,25 +17,24 @@ class Car{
     based on user keyboard interaction*/
     update() {
         if (this.controls.forward){
-            //this.y = this.y - 2;
-            this.speed+=this.acceleration;
+            this.speed+=this.acceleration; //Increase speed when moving forward
         }
         if (this.controls.reverse){
-            this.speed-=this.acceleration;
+            this.speed-=this.acceleration; //Decrease speed when moving in reverse
         }
         if (this.speed > this.maxSpeed){
-            this.speed=this.maxSpeed;
+            this.speed=this.maxSpeed; //Limit maximum forward speed
         }
         if (this.speed < (-this.maxSpeed/2)){
-            this.speed=-this.maxSpeed/2;
+            this.speed=-this.maxSpeed/2; //Ensures that maximum speed for reverse
         }
         if (this.speed > 0){
-            this.speed-=this.friction;
+            this.speed-=this.friction; //Applies friction to reduce forward speed
         }
         if (this.speed < 0){
-            this.speed+=this.friction;
+            this.speed+=this.friction; //Applies friction to reduce reverse speed gradually
         }
-        this.y-=this.speed;
+        this.y-=this.speed; //Updates car position
     }
 
     draw(ctx){
