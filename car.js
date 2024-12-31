@@ -9,6 +9,7 @@ class Car{
         this.acceleration=0.2;
         this.maxSpeed=3;
         this.friction=0.05;
+        this.angle=0;
 
         this.controls=new Controls();
     }
@@ -34,14 +35,29 @@ class Car{
         if (this.speed < 0){
             this.speed+=this.friction; //Applies friction to reduce reverse speed gradually
         }
+        if (Math.abs(this.speed) < this.friction){
+            this.speed=0;
+        }
+        if (this.controls.left){
+            this.angle+=0.03;
+        }
+        if (this.controls.right){
+            this.angle-=0.03;
+        }
         this.y-=this.speed; //Updates car position
     }
 
     draw(ctx){
+        ctx.save();
+        ctx.translate(this.x,this.y);
+        ctx.rotate(-this.angle);
+
         ctx.beginPath();
         //draws path by connecting a set of points 
-        ctx.rect(this.x-this.width/2, this.y-this.height/2,this.width,this.height);
+        ctx.rect(-this.width/2,-this.height/2,this.width,this.height);
         ctx.fill();
         //Fills the current path
+
+        ctx.restore();
     }
 }
