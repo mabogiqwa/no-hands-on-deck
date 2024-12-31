@@ -17,6 +17,10 @@ class Car{
     /*Function that will reflect directional changes on canvas 
     based on user keyboard interaction*/
     update() {
+        this.#move();
+    }
+
+    #move(){
         if (this.controls.forward){
             this.speed+=this.acceleration; //Increase speed when moving forward
         }
@@ -44,7 +48,9 @@ class Car{
         if (this.controls.right){
             this.angle-=0.03;
         }
-        this.y-=this.speed; //Updates car position
+
+        this.x-=Math.sin(this.angle)*this.speed;
+        this.y-=Math.cos(this.angle)*this.speed;
     }
 
     draw(ctx){
