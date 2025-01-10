@@ -1,10 +1,6 @@
 //Feature addition: Add a curved road
 class Road{
-<<<<<<< HEAD
     constructor(x,width,laneCount=3){
-=======
-    constructor(x,width,laneCount=4){
->>>>>>> 802ca62bf0027ffce6242c9e2b26ae233cf9c665
         this.x=x; //Sets the x-coordinate of the road's center
         this.width=width; //Sets the width of the road
         this.laneCount=laneCount; //Sets the number of lanes
@@ -15,6 +11,15 @@ class Road{
         const infinity=1000000; //Defines a large value(infinity) to simulate a long road
         this.top=-infinity; //Sets the top boundary of the road to -infinity (extending far upward)
         this.bottom=infinity; //Sets the bottom boundary of the road to infinity (extending far downward)
+
+        const topLeft={x: this.left, y: this.top};
+        const topRight={x: this.right, y: this.top};
+        const bottomLeft={x:this.left, y: this.bottom};
+        const bottomRight={x: this.right, y: this.bottom};
+        this.border=[
+            [topLeft,bottomLeft],
+            [topRight,bottomRight]
+        ];
     }
 
     getLaneCenter(laneIndex){
