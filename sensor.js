@@ -4,12 +4,47 @@ class Sensor {
         this.rayCount = 50;
         this.rayLength = 100;
         this.raySpread = Math.PI/2;
+
         this.rays = [];
         this.update(); // Initialize rays immediately
+
+        this.readings=[];
     }
 
-    update() {
+    update(roadBorders) {
         this.#castRays();
+        this.readings=[];
+        for (let i=0; i < this.rays.length; i++) {
+            this.readings.push(
+                this.#getReading(this.rays[i], roadBorders) 
+            );
+        }
+    } 
+
+    #getReading(ray, roadBorders) {
+        /*
+        let touches=[];
+
+        for (let i=0; i < roadBorders.length; i++) {
+            const touch = getIntersection(
+                ray[0],
+                ray[1],
+                roadBorders[i][0],
+                roadBorders[i][1]
+            );
+            if (touch) {
+                touches.push(touch);
+            }
+        }
+
+        if (touches.length==0) {
+            return null;
+        } else {
+            const offsets = touches.map(e=>e.offset);
+            const minOffset = Math.min(...offsets);
+            return touches.find(e=>e.offset==minOffset);
+        }
+        */
     }
 
     #castRays()
@@ -53,26 +88,28 @@ class Sensor {
     }
 }
 
+/*
 function lerp(A,B,t) {
     return A+(B-A)*t;
 }
 
-function getIntersection(A,B,C,D) {
-    const tTop = (D.x-C.x)*(A.y-C.y)-(D.y-C.y)*(A.x-C.x);
-    const uTop = (C.y-A.y)*(A.x-B.x)-(C.x-A.x)*(A.y-B.y);
-    const bottom = (D.y-C.y)*(B.x-A.x)-(D.x-C.x)*(B.y-A.y);
-
-    if (bottom!=0) {
-        const t = tTop/bottom;
-        const u = uTop/bottom;
-        if (t>=0 && t<=1 && u>=0 && u<=1) {
+function getIntersection(A,B,C,D){ 
+    const tTop=(D.x-C.x)*(A.y-C.y)-(D.y-C.y)*(A.x-C.x);
+    const uTop=(C.y-A.y)*(A.x-B.x)-(C.x-A.x)*(A.y-B.y);
+    const bottom=(D.y-C.y)*(B.x-A.x)-(D.x-C.x)*(B.y-A.y);
+    
+    if(bottom!=0){
+        const t=tTop/bottom;
+        const u=uTop/bottom;
+        if(t>=0 && t<=1 && u>=0 && u<=1){
             return {
-                x: lerp(A.x,B.x,t),
-                y: lerp(A.y,B.y,t),
-                offset: t
+                x:lerp(A.x,B.x,t),
+                y:lerp(A.y,B.y,t),
+                offset:t
             }
         }
     }
 
     return null;
 }
+    */
