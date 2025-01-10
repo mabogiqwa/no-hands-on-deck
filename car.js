@@ -17,9 +17,9 @@ class Car{
 
     /*Function that will reflect directional changes on canvas 
     based on user keyboard interaction*/
-    update() {
+    update(roadBorders) {
         this.#move();
-        this.sensor.update();
+        this.sensor.update(roadBorders);
     }
 
     #move(){
@@ -63,7 +63,7 @@ class Car{
         ctx.beginPath();
         //draws path by connecting a set of points 
         ctx.rect(-this.width/2,-this.height/2,this.width,this.height);
-        
+
         ctx.fill();
         //Fills the current path
 

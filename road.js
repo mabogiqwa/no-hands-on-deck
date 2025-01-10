@@ -16,7 +16,8 @@ class Road{
         const topRight={x: this.right, y: this.top};
         const bottomLeft={x:this.left, y: this.bottom};
         const bottomRight={x: this.right, y: this.bottom};
-        this.border=[
+
+        this.borders=[
             [topLeft,bottomLeft],
             [topRight,bottomRight]
         ];
@@ -32,7 +33,7 @@ class Road{
         ctx.strokeStyle="white";
 
         //Loops through the lane boundaries
-        for(let i=0; i <= this.laneCount; i++){
+        for(let i=1; i <= this.laneCount-1; i++){
             const x=lerp(this.left,this.right,i/this.laneCount); //Calculates the x-coordinate of the lane boundary using linear interpolation
 
             if(i>0 && i<this.laneCount){ //Checks if boundary is not leftmost or rightmost edge
@@ -40,16 +41,20 @@ class Road{
             } else {
                 ctx.setLineDash([]); //Removes dashed lines for outer edges
             }
+            ctx.setLineDash([20,20]);
             ctx.beginPath();
-            ctx.moveTo(this.left,this.top); 
-            ctx.lineTo(this.left,this.bottom); 
-            ctx.stroke(); 
-
-            ctx.beginPath();
-            ctx.moveTo(x,this.top); //Moves drawing cursor to the top of the lane boundary
-            ctx.lineTo(x,this.bottom); //Draws vertical line from the top to the bottom of the road.
-            ctx.stroke(); //Renders the line
+            ctx.moveTo(x,this.top); 
+            ctx.lineTo(x,this.bottom); 
+            ctx.stroke();
         }
+
+        ctx.setLineDash([]);
+        this.borders.forEach(border=>{
+                ctx.beginPath(); 
+                ctx.moveTo(border[0].x, border[0].y);
+                ctx.lineTo(border[1].x, border[1].y);
+                ctx.stroke();
+            });
     }
 }
 
