@@ -1,44 +1,45 @@
 //Feature addition: Add a curved road
 class Road{
     constructor(x,width,laneCount=4){
-        this.x=x;
-        this.width=width;
-        this.laneCount=laneCount;
+        this.x=x; //Sets the x-coordinate of the road's center
+        this.width=width; //Sets the width of the road
+        this.laneCount=laneCount; //Sets the number of lanes
 
-        this.left=x-width/2;
-        this.right=x+width/2;
+        this.left=x-width/2; //Stores the x-coordinate of the left edge of the road
+        this.right=x+width/2; //Stores the x-coordinate of the right edge of the road
 
-        const infinity=1000000;
-        this.top=-infinity;
-        this.bottom=infinity;
+        const infinity=1000000; //Defines a large value(infinity) to simulate a long road
+        this.top=-infinity; //Sets the top boundary of the road to -infinity (extending far upward)
+        this.bottom=infinity; //Sets the bottom boundary of the road to infinity (extending far downward)
     }
 
     getLaneCenter(laneIndex){
-        const laneWidth=this.width/this.laneCount;
-        return this.left+laneWidth/2+Math.min(laneIndex,this.laneCount-1)*laneWidth;
+        const laneWidth=this.width/this.laneCount; //Computes the width of each lane
+        return this.left+laneWidth/2+Math.min(laneIndex,this.laneCount-1)*laneWidth; //Calculates the center of the lane
     }
 
     draw(ctx){
-        ctx.lineWidth=5;
+        ctx.lineWidth=5; //Sets line width for drawing
         ctx.strokeStyle="white";
 
+        //Loops through the lane boundaries
         for(let i=0; i <= this.laneCount; i++){
-            const x=lerp(this.left,this.right,i/this.laneCount);
+            const x=lerp(this.left,this.right,i/this.laneCount); //Calculates the x-coordinate of the lane boundary using linear interpolation
 
-            if(i>0 && i<this.laneCount){
-                ctx.setLineDash([20,20]);
+            if(i>0 && i<this.laneCount){ //Checks if boundary is not leftmost or rightmost edge
+                ctx.setLineDash([20,20]); //Sets dash lines for inner lane dividers
             } else {
-                ctx.setLineDash([]);
+                ctx.setLineDash([]); //Removes dashed lines for outer edges
             }
             ctx.beginPath();
-            ctx.moveTo(this.left,this.top);
-            ctx.lineTo(this.left,this.bottom);
-            ctx.stroke();
+            ctx.moveTo(this.left,this.top); 
+            ctx.lineTo(this.left,this.bottom); 
+            ctx.stroke(); 
 
             ctx.beginPath();
-            ctx.moveTo(x,this.top);
-            ctx.lineTo(x,this.bottom);
-            ctx.stroke();
+            ctx.moveTo(x,this.top); //Moves drawing cursor to the top of the lane boundary
+            ctx.lineTo(x,this.bottom); //Draws vertical line from the top to the bottom of the road.
+            ctx.stroke(); //Renders the line
         }
     }
 }
