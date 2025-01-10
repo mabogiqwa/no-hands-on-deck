@@ -1,6 +1,10 @@
 //Feature addition: Add a curved road
 class Road{
+<<<<<<< HEAD
     constructor(x,width,laneCount=3){
+=======
+    constructor(x,width,laneCount=4){
+>>>>>>> 802ca62bf0027ffce6242c9e2b26ae233cf9c665
         this.x=x; //Sets the x-coordinate of the road's center
         this.width=width; //Sets the width of the road
         this.laneCount=laneCount; //Sets the number of lanes
