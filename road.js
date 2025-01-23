@@ -34,13 +34,19 @@ class Road{
 
         //Loops through the lane boundaries
         for(let i=1; i <= this.laneCount-1; i++){
-            const x=lerp(this.left,this.right,i/this.laneCount); //Calculates the x-coordinate of the lane boundary using linear interpolation
+            const x=lerp(this.left,
+                this.right,
+                i/this.laneCount
+            ); //Calculates the x-coordinate of the lane boundary using linear interpolation
 
+            /*
             if(i>0 && i<this.laneCount){ //Checks if boundary is not leftmost or rightmost edge
                 ctx.setLineDash([20,20]); //Sets dash lines for inner lane dividers
             } else {
                 ctx.setLineDash([]); //Removes dashed lines for outer edges
             }
+            */
+
             ctx.setLineDash([20,20]);
             ctx.beginPath();
             ctx.moveTo(x,this.top); 
@@ -57,9 +63,3 @@ class Road{
             });
     }
 }
-
-/*
-function lerp(A,B,t){
-    return A+(B-A)*t;
-}
-*/
